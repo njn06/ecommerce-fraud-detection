@@ -46,3 +46,6 @@ wheels/
 # OS
 .DS_Store
 Thumbs.db
+
+# CSV files (from remote)
+*.csv
