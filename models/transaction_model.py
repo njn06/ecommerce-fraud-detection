@@ -67,9 +67,19 @@ def run_transaction_model(path):
             X_scaled, y, test_size=0.2, random_state=RANDOM_STATE
         )
 
+    # Apply SMOTE to the training data to handle class imbalance
+    from imblearn.over_sampling import SMOTE
+    print("Applying SMOTE to balance the training classes...")
+    smote = SMOTE(random_state=RANDOM_STATE)
+    X_train, y_train = smote.fit_resample(X_train, y_train)
+
     model = RandomForestClassifier(
-        n_estimators=100,
-        random_state=RANDOM_STATE
+        n_estimators=150,
+        max_depth=15,
+        min_samples_split=5,
+        class_weight='balanced',
+        random_state=RANDOM_STATE,
+        n_jobs=-1
     )
     model.fit(X_train, y_train)
 

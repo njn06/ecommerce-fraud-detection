@@ -2,8 +2,7 @@ from models.behavior_model import run_behavior_model
 from models.transaction_model import run_transaction_model
 from models.keystroke_model import run_keystroke_model
 from fusion.risk_fusion import fuse_scores
-from evaluation.metrics import print_summary
-
+from evaluation.metrics import print_summary, print_classification_metrics
 
 def main():
     """
@@ -34,6 +33,9 @@ def main():
         keystroke_scores,
         final_scores,
     )
+    
+    # Calculate Precision, Recall, F1
+    print_classification_metrics(y_test, final_scores, threshold=0.4)
 
     # Save per-transaction risk scores (test set) for downstream decisions
     import os

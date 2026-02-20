@@ -26,3 +26,16 @@ def print_summary(behavior_scores, transaction_scores, keystroke_scores, final_s
         _stats("Fused", final_scores)
         print(f"\n  Sample predictions (first 5): {final_scores[:5].round(4).tolist()}")
 
+def print_classification_metrics(y_true, y_pred_proba, threshold=0.4):
+    """
+    Print precision, recall, f1, and AUC for transaction models
+    using a custom detection threshold.
+    """
+    from sklearn.metrics import classification_report, roc_auc_score
+    
+    y_pred = (y_pred_proba > threshold).astype(int)
+    print(f"\n---- Detection Performance (Threshold={threshold}) ----")
+    print(classification_report(y_true, y_pred, target_names=["Genuine", "Fraud"]))
+    
+    auc = roc_auc_score(y_true, y_pred_proba)
+    print(f"  ROC-AUC Score: {auc:.4f}")
