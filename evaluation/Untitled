@@ -1,0 +1,9 @@
+def print_summary(behavior_score, transaction_score, keystroke_score, final_score):
+
+    print("\n---- Individual Model Scores ----")
+    print(f"Behavior Score     : {behavior_score:.4f}")
+    print(f"Transaction Score  : {transaction_score:.4f}")
+    print(f"Keystroke Score    : {keystroke_score:.4f}")
+
+    print("\n---- Final Fused Risk Score ----")
+    print(f"Overall Fraud Risk : {final_score:.4f}")
